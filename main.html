@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authorization Example</title>
+</head>
+<body>
+
+<!-- Unauthorized Access Section -->
+<div id="unauthorized" style="float: left;">
+    <h1>Unauthorized Access</h1>
+    <p>Click the button to download the unauthorized file.</p>
+    <button onclick="downloadUnauthorizedFile()">Download Unauthorized File</button>
+    
+    <script>
+        function downloadUnauthorizedFile() {
+        var pupUrl = "https://www.pup.edu.ph/"; // Replace with the actual PUP website URL
+        var fileName = "PUP.pdf"; // Name of the file to download
+        var blob = new Blob([pupUrl], { type: "text/plain" });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement("a");
+        a.href = url;
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        }
+    </script>
+</div>
+
+<!-- Authorized Access Section -->
+<div id="authorized" style="float: right;">
+    <h1>Authorized Access</h1>
+    <p>Click the button to authorize and download the authorized file.</p>
+    <button onclick="authorize()">Authorize</button>
+    
+    <script>
+        function authorize() {
+            var password = prompt("Please enter the authorization password:");
+            if (password === "mypassword") {
+                window.location.href = "authorized.html";
+            } else {
+                alert("Incorrect password. Authorization failed.");
+            }
+        }
+    </script>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authorized Access</title>
+</head>
+<body>
+
+<script>
+    // Function to download a text file with the PUP website URL
+    function downloadPUPUrl() {
+        var pupUrl = "https://www.pup.edu.ph/"; // Replace with the actual PUP website URL
+        var fileName = "pup_website.html"; // Name of the file to download
+        var blob = new Blob([pupUrl], { type: "text/plain" });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement("a");
+        a.href = url;
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+
+    // Trigger the download when the page loads
+    window.onload = function() {
+        downloadPUPUrl();
+    };
+</script>
+
+<h1>Authorized Access</h1>
+<p>Downloading a file containing the PUP website URL...</p>
+
+</body>
+</html>
